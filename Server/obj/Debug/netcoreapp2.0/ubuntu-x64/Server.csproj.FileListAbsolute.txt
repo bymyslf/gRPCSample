@@ -1,0 +1,15 @@
+D:\GitProjects\gRPCSample\Server\bin\Debug\netcoreapp2.0\ubuntu-x64\libhostpolicy.so
+D:\GitProjects\gRPCSample\Server\bin\Debug\netcoreapp2.0\ubuntu-x64\libhostfxr.so
+D:\GitProjects\gRPCSample\Server\bin\Debug\netcoreapp2.0\ubuntu-x64\Server
+D:\GitProjects\gRPCSample\Server\bin\Debug\netcoreapp2.0\ubuntu-x64\Server.deps.json
+D:\GitProjects\gRPCSample\Server\bin\Debug\netcoreapp2.0\ubuntu-x64\Server.runtimeconfig.json
+D:\GitProjects\gRPCSample\Server\bin\Debug\netcoreapp2.0\ubuntu-x64\Server.runtimeconfig.dev.json
+D:\GitProjects\gRPCSample\Server\bin\Debug\netcoreapp2.0\ubuntu-x64\Server.dll
+D:\GitProjects\gRPCSample\Server\bin\Debug\netcoreapp2.0\ubuntu-x64\Server.pdb
+D:\GitProjects\gRPCSample\Server\bin\Debug\netcoreapp2.0\ubuntu-x64\Proto.dll
+D:\GitProjects\gRPCSample\Server\bin\Debug\netcoreapp2.0\ubuntu-x64\Proto.pdb
+D:\GitProjects\gRPCSample\Server\obj\Debug\netcoreapp2.0\ubuntu-x64\Server.csproj.CoreCompileInputs.cache
+D:\GitProjects\gRPCSample\Server\obj\Debug\netcoreapp2.0\ubuntu-x64\Server.AssemblyInfoInputs.cache
+D:\GitProjects\gRPCSample\Server\obj\Debug\netcoreapp2.0\ubuntu-x64\Server.AssemblyInfo.cs
+D:\GitProjects\gRPCSample\Server\obj\Debug\netcoreapp2.0\ubuntu-x64\Server.dll
+D:\GitProjects\gRPCSample\Server\obj\Debug\netcoreapp2.0\ubuntu-x64\Server.pdb
