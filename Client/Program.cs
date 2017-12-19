@@ -12,9 +12,7 @@ namespace Client
 {
     class Program
     {
-        public static void Main(string[] args) => AsyncMain(args).GetAwaiter().GetResult();
-
-        static async Task AsyncMain(string[] args)
+        public static void Main(string[] args)
         {
             int numServers = 10;
             int.TryParse(args[0], out numServers);
