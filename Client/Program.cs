@@ -55,10 +55,7 @@ namespace Client
             await channel.ConnectAsync(deadline: DateTime.UtcNow.AddSeconds(20));
 
             var client = new HelloService.HelloServiceClient(channel);
-           
-            String user = $"Luís-{data}";
-
-            var reply = await client.SayHelloAsync(new HelloRequest { Name = user }, deadline: DateTime.UtcNow.AddSeconds(20));
+            var reply = await client.SayHelloAsync(new HelloRequest { Name = $"Luís-{data}" }, deadline: DateTime.UtcNow.AddSeconds(20));
             Console.WriteLine($"[Task:{data.taskId}] - Greeting: {reply.Message}");
         }
 
