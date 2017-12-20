@@ -1,62 +1,65 @@
 ﻿using System;
 using gRPCSample.Proto;
 using Grpc.Core;
-using System.Threading;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
+using System.Collections.Concurrent;
+using System.Collections;
 
 namespace Client
 {
     class Program
     {
-        public static void Main(string[] args)
+        private static readonly ChannelsCache channelsCache = new ChannelsCache(
+            (port) => (pt) => new Channel($"127.0.0.1:{pt}", ChannelCredentials.Insecure));
+
+        public static void Main(string[] args) => AsyncMain(args).GetAwaiter().GetResult();
+
+        private static async Task AsyncMain(string[] args)
         {
             int numServers = 10;
             int.TryParse(args[0], out numServers);
 
-            int numThreads = 10;
-            int.TryParse(args[1], out numThreads);
+            int numTasks = 10;
+            int.TryParse(args[1], out numTasks);
 
-            var ports = Enumerable.Range(50051, numServers);
+            //var ports = Enumerable.Range(50051, numServers);
 
-            Console.WriteLine("Spawning worker threads...\n");
-            var workerThreads = StartWorkerThreads(numThreads, ports.ToArray());
+            //Console.WriteLine("Spawning worker tasks...\n");
+            //var workerTasks = StartWorkerTasks(numTasks, ports.ToArray());
 
             Console.WriteLine("Spawning server processes...\n");
             var serverProcesses = StartServerProcesses(numServers);
 
-            //Console.WriteLine("Spawning worker threads...\n");
-            //var workerThreads = StartWorkerThreads(numThreads, serverProcesses.Select(it => it.port).ToArray());
+            Console.WriteLine("Spawning worker tasks...\n");
+            var workerTasks = StartWorkerTasks(numTasks, serverProcesses.Select(it => it.port).ToArray());
 
-            foreach (var thread in workerThreads)
-                thread.Join(500);
+            await Task.WhenAll(workerTasks);
+
+            await Task.WhenAll(channelsCache.Select( ch => ch.ShutdownAsync()));
 
             foreach (var proc in serverProcesses)
-            {
                 proc.process.Close();
-                //proc.process.Kill();
-            }
-                
+
             Console.WriteLine("Press any key to exit...");
             Console.ReadKey();
         }
 
-        private static void DoWork((int port, int threadId) data)
+        private static async Task DoWork((int port, int taskId) data)
         {
-            Channel channel = new Channel($"127.0.0.1:{data.port}", ChannelCredentials.Insecure);
-            channel.ConnectAsync(deadline: DateTime.UtcNow.AddSeconds(20)).Wait();
+            var channel = channelsCache.GetOrAdd(data.port);
+            await channel.ConnectAsync(deadline: DateTime.UtcNow.AddSeconds(20));
 
             var client = new HelloService.HelloServiceClient(channel);
            
             String user = $"Luís-{data}";
 
-            var reply = client.SayHello(new HelloRequest { Name = user }, deadline: DateTime.UtcNow.AddSeconds(20));
-            Console.WriteLine($"[Thread:{data.threadId}] - Greeting: {reply.Message}");
-
-            channel.ShutdownAsync().Wait();
+            var reply = await client.SayHelloAsync(new HelloRequest { Name = user }, deadline: DateTime.UtcNow.AddSeconds(20));
+            Console.WriteLine($"[Task:{data.taskId}] - Greeting: {reply.Message}");
         }
 
         private static (Process process, int port)[] StartServerProcesses(int numServers)
@@ -71,7 +74,6 @@ namespace Client
                     : @"D:\GitProjects\gRPCSample\Server\bin\Debug\netcoreapp2.0\win-x64\publish\Server.exe";
                 try
                 {
-                    Console.WriteLine(path);
                     serverProcesses[i] = (Process.Start(path, $"{startPort}"), startPort);
                 }
                 catch (Win32Exception w)
@@ -90,21 +92,49 @@ namespace Client
             return serverProcesses;
         }
 
-        private static Thread[] StartWorkerThreads(int numThreads, int[] processPorts)
+        private static Task[] StartWorkerTasks(int numTasks, int[] processPorts)
         {
             int numServers = processPorts.Length;
-            var workerThreads = new Thread[numThreads];
-            for (int i = 0, threadId = 0; i < numThreads; i++, threadId++)
+            var workerTasks = new Task[numTasks];
+            for (int i = 0, taskId = 0; i < numTasks; i++, taskId++)
             {
                 for (int j = 0; j < numServers; j++)
                 {
                     int portTemp = j;
-                    workerThreads[i] = new Thread(() => DoWork((processPorts[portTemp], threadId)));
-                    workerThreads[i].Start();
+                    int taskTemp = taskId;
+                    workerTasks[i] = Task.Run(() => DoWork((processPorts[portTemp], taskTemp)));
                 }
             }
 
-            return workerThreads;
+            return workerTasks;
+        }
+
+        private struct ChannelsCache : IEnumerable<Channel>
+        {
+            private readonly ConcurrentDictionary<int, Lazy<Func<int, Channel>>> dictionary;
+            private readonly Func<int, Lazy<Func<int, Channel>>> valueFactory;
+
+            public ChannelsCache(Func<int, Func<int, Channel>> valueFactory)
+            {
+                dictionary = new ConcurrentDictionary<int, Lazy<Func<int, Channel>>>();
+                this.valueFactory = key => new Lazy<Func<int, Channel>>(() => valueFactory(key));
+            }
+
+            public Channel GetOrAdd(int key)
+            {
+                return dictionary.GetOrAdd(key, valueFactory).Value(key);
+            }
+
+            public IEnumerator<Channel> GetEnumerator()
+            {
+                foreach (var key in dictionary.Keys)
+                    yield return dictionary[key].Value(key);
+            }
+
+            IEnumerator IEnumerable.GetEnumerator()
+            {
+                return GetEnumerator();
+            }
         }
     }
 }

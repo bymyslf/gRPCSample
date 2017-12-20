@@ -6,4 +6,3 @@ D:\GitProjects\gRPCSample\Proto\obj\Debug\netstandard2.0\Proto.AssemblyInfo.cs
 D:\GitProjects\gRPCSample\Proto\bin\Debug\netstandard2.0\Proto.pdb
 D:\GitProjects\gRPCSample\Proto\obj\Debug\netstandard2.0\Proto.dll
 D:\GitProjects\gRPCSample\Proto\obj\Debug\netstandard2.0\Proto.pdb
-D:\GitProjects\gRPCSample\Proto\obj\Debug\netstandard2.0\Proto.csprojResolveAssemblyReference.cache
