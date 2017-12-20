@@ -24,12 +24,8 @@ namespace Server
     {
         public static void Main(string[] args)
         {
-            if (args.Length < 1)
-            {
-                throw new InvalidOperationException("Port should be defined");
-            }
-
-            int.TryParse(args[0], out int port);
+            int port = 50051;
+            int.TryParse(args[0], out port);
 
             Core.Server server = new Core.Server
             {

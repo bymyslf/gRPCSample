@@ -35,7 +35,7 @@ namespace Client
             var workerTasks = StartWorkerTasks(numTasks, serverProcesses.Select(it => it.port).ToArray());
 
             await Task.WhenAll(workerTasks);
-            await Task.WhenAll(channelsCache.Select( ch => ch.ShutdownAsync()));
+            await Task.WhenAll(channelsCache.Select(ch => ch.ShutdownAsync()));
 
             foreach (var proc in serverProcesses)
                 proc.process.Close();
