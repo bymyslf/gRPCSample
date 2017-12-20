@@ -15,7 +15,8 @@ namespace Client
     class Program
     {
         private static readonly ChannelsCache channelsCache = new ChannelsCache(
-            (port) => (pt) => new Channel($"127.0.0.1:{pt}", ChannelCredentials.Insecure));
+            (port) => (prt) => new Channel($"127.0.0.1:{prt}", ChannelCredentials.Insecure)
+        );
 
         public static void Main(string[] args) => AsyncMain(args).GetAwaiter().GetResult();
 
@@ -27,11 +28,6 @@ namespace Client
             int numTasks = 10;
             int.TryParse(args[1], out numTasks);
 
-            //var ports = Enumerable.Range(50051, numServers);
-
-            //Console.WriteLine("Spawning worker tasks...\n");
-            //var workerTasks = StartWorkerTasks(numTasks, ports.ToArray());
-
             Console.WriteLine("Spawning server processes...\n");
             var serverProcesses = StartServerProcesses(numServers);
 
@@ -39,7 +35,6 @@ namespace Client
             var workerTasks = StartWorkerTasks(numTasks, serverProcesses.Select(it => it.port).ToArray());
 
             await Task.WhenAll(workerTasks);
-
             await Task.WhenAll(channelsCache.Select( ch => ch.ShutdownAsync()));
 
             foreach (var proc in serverProcesses)
@@ -68,7 +63,8 @@ namespace Client
             {
                 string path = isLinux 
                     ? @"../Server/Server" 
-                    : @"D:\GitProjects\gRPCSample\Server\bin\Debug\netcoreapp2.0\win-x64\publish\Server.exe";
+                    //? @"../Server/bin/Debug/netcoreapp2.0/ubuntu-x64/publish/Server"
+                    : @"..\Server\bin\Debug\netcoreapp2.0\win-x64\publish\Server.exe";
                 try
                 {
                     serverProcesses[i] = (Process.Start(path, $"{startPort}"), startPort);
@@ -93,12 +89,11 @@ namespace Client
         {
             int numServers = processPorts.Length;
             var workerTasks = new Task[numTasks];
-            for (int i = 0, taskId = 0; i < numTasks; i++, taskId++)
+            for (int i = 0, taskId = 1; i < numTasks; i++, taskId++)
             {
                 for (int j = 0; j < numServers; j++)
                 {
-                    int portTemp = j;
-                    int taskTemp = taskId;
+                    int portTemp = j, taskTemp = taskId;
                     workerTasks[i] = Task.Run(() => DoWork((processPorts[portTemp], taskTemp)));
                 }
             }
