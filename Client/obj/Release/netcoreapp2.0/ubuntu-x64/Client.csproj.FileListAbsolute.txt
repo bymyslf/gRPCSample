@@ -1,0 +1,15 @@
+D:\GitProjects\gRPCSample\Client\bin\Release\netcoreapp2.0\ubuntu-x64\libhostpolicy.so
+D:\GitProjects\gRPCSample\Client\bin\Release\netcoreapp2.0\ubuntu-x64\libhostfxr.so
+D:\GitProjects\gRPCSample\Client\bin\Release\netcoreapp2.0\ubuntu-x64\Client
+D:\GitProjects\gRPCSample\Client\bin\Release\netcoreapp2.0\ubuntu-x64\Client.deps.json
+D:\GitProjects\gRPCSample\Client\bin\Release\netcoreapp2.0\ubuntu-x64\Client.runtimeconfig.json
+D:\GitProjects\gRPCSample\Client\bin\Release\netcoreapp2.0\ubuntu-x64\Client.runtimeconfig.dev.json
+D:\GitProjects\gRPCSample\Client\bin\Release\netcoreapp2.0\ubuntu-x64\Client.dll
+D:\GitProjects\gRPCSample\Client\bin\Release\netcoreapp2.0\ubuntu-x64\Client.pdb
+D:\GitProjects\gRPCSample\Client\bin\Release\netcoreapp2.0\ubuntu-x64\Proto.dll
+D:\GitProjects\gRPCSample\Client\bin\Release\netcoreapp2.0\ubuntu-x64\Proto.pdb
+D:\GitProjects\gRPCSample\Client\obj\Release\netcoreapp2.0\ubuntu-x64\Client.csproj.CoreCompileInputs.cache
+D:\GitProjects\gRPCSample\Client\obj\Release\netcoreapp2.0\ubuntu-x64\Client.AssemblyInfoInputs.cache
+D:\GitProjects\gRPCSample\Client\obj\Release\netcoreapp2.0\ubuntu-x64\Client.AssemblyInfo.cs
+D:\GitProjects\gRPCSample\Client\obj\Release\netcoreapp2.0\ubuntu-x64\Client.dll
+D:\GitProjects\gRPCSample\Client\obj\Release\netcoreapp2.0\ubuntu-x64\Client.pdb

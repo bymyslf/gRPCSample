@@ -9,7 +9,7 @@ namespace Benchmark
         {
             BenchmarkRunner.Run<Benchmark>();
 
-            Console.WriteLine("Done");
+            Console.WriteLine("Benchmark completed");
             Console.ReadLine();
         }
     }

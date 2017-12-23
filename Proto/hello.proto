@@ -12,4 +12,5 @@ message HelloRequest {
 
 message HelloResponse {
   string message = 1;
+  string test = 2;
 }

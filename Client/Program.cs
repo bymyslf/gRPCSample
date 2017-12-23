@@ -63,7 +63,6 @@ namespace Client
             {
                 string path = isLinux 
                     ? @"../Server/Server" 
-                    //? @"../Server/bin/Debug/netcoreapp2.0/ubuntu-x64/publish/Server"
                     : @"..\Server\bin\Debug\netcoreapp2.0\win-x64\publish\Server.exe";
                 try
                 {
@@ -112,10 +111,7 @@ namespace Client
                 this.valueFactory = key => new Lazy<Func<int, Channel>>(() => valueFactory(key));
             }
 
-            public Channel GetOrAdd(int key)
-            {
-                return dictionary.GetOrAdd(key, valueFactory).Value(key);
-            }
+            public Channel GetOrAdd(int key) => dictionary.GetOrAdd(key, valueFactory).Value(key);
 
             public IEnumerator<Channel> GetEnumerator()
             {
@@ -123,10 +119,7 @@ namespace Client
                     yield return dictionary[key].Value(key);
             }
 
-            IEnumerator IEnumerable.GetEnumerator()
-            {
-                return GetEnumerator();
-            }
+            IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
         }
     }
 }

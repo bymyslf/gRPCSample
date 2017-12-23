@@ -15,9 +15,7 @@ namespace Server
         }
 
         public override Task<HelloResponse> SayHello(HelloRequest request, Core.ServerCallContext context)
-        {
-            return Task.FromResult(new HelloResponse { Message = $"Hello {request.Name}"});
-        }
+            => Task.FromResult(new HelloResponse { Message = $"Hello {request.Name}" });
     }
 
     class Program

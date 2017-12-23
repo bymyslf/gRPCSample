@@ -1083,6 +1083,9 @@
   },
   "project": {
     "version": "1.0.0",
+    "restoreSettings": {
+      "hideWarningsAndErrors": true
+    },
     "restore": {
       "projectUniqueName": "D:\\GitProjects\\gRPCSample\\Proto\\Proto.csproj",
       "projectName": "Proto",
@@ -1121,29 +1124,29 @@
         "dependencies": {
           "Google.Protobuf": {
             "target": "Package",
-            "version": "[3.5.0, )"
-          },
-          "Google.Protobuf.Tools": {
-            "target": "Package",
-            "version": "[3.5.0, )"
-          },
-          "Grpc": {
-            "target": "Package",
-            "version": "[1.8.0, )"
-          },
-          "Grpc.Core": {
-            "target": "Package",
-            "version": "[1.8.0, )"
-          },
-          "Grpc.Tools": {
-            "target": "Package",
-            "version": "[1.8.0, )"
+            "version": "3.5.0"
           },
           "NETStandard.Library": {
             "suppressParent": "All",
             "target": "Package",
-            "version": "[2.0.0, )",
+            "version": "2.0.0",
             "autoReferenced": true
+          },
+          "Google.Protobuf.Tools": {
+            "target": "Package",
+            "version": "3.5.0"
+          },
+          "Grpc.Core": {
+            "target": "Package",
+            "version": "1.8.0"
+          },
+          "Grpc.Tools": {
+            "target": "Package",
+            "version": "1.8.0"
+          },
+          "Grpc": {
+            "target": "Package",
+            "version": "1.8.0"
           }
         },
         "imports": [

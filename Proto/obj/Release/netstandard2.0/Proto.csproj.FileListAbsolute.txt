@@ -1,0 +1,8 @@
+D:\GitProjects\gRPCSample\Proto\bin\Release\netstandard2.0\Proto.deps.json
+D:\GitProjects\gRPCSample\Proto\bin\Release\netstandard2.0\Proto.dll
+D:\GitProjects\gRPCSample\Proto\bin\Release\netstandard2.0\Proto.pdb
+D:\GitProjects\gRPCSample\Proto\obj\Release\netstandard2.0\Proto.csproj.CoreCompileInputs.cache
+D:\GitProjects\gRPCSample\Proto\obj\Release\netstandard2.0\Proto.AssemblyInfoInputs.cache
+D:\GitProjects\gRPCSample\Proto\obj\Release\netstandard2.0\Proto.AssemblyInfo.cs
+D:\GitProjects\gRPCSample\Proto\obj\Release\netstandard2.0\Proto.dll
+D:\GitProjects\gRPCSample\Proto\obj\Release\netstandard2.0\Proto.pdb

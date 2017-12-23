@@ -1,0 +1,13 @@
+D:\GitProjects\gRPCSample\Client\bin\Release\netcoreapp2.0\Client.deps.json
+D:\GitProjects\gRPCSample\Client\bin\Release\netcoreapp2.0\Client.runtimeconfig.json
+D:\GitProjects\gRPCSample\Client\bin\Release\netcoreapp2.0\Client.runtimeconfig.dev.json
+D:\GitProjects\gRPCSample\Client\bin\Release\netcoreapp2.0\Client.dll
+D:\GitProjects\gRPCSample\Client\bin\Release\netcoreapp2.0\Client.pdb
+D:\GitProjects\gRPCSample\Client\bin\Release\netcoreapp2.0\Proto.dll
+D:\GitProjects\gRPCSample\Client\bin\Release\netcoreapp2.0\Proto.pdb
+D:\GitProjects\gRPCSample\Client\obj\Release\netcoreapp2.0\Client.csprojResolveAssemblyReference.cache
+D:\GitProjects\gRPCSample\Client\obj\Release\netcoreapp2.0\Client.csproj.CoreCompileInputs.cache
+D:\GitProjects\gRPCSample\Client\obj\Release\netcoreapp2.0\Client.AssemblyInfoInputs.cache
+D:\GitProjects\gRPCSample\Client\obj\Release\netcoreapp2.0\Client.AssemblyInfo.cs
+D:\GitProjects\gRPCSample\Client\obj\Release\netcoreapp2.0\Client.dll
+D:\GitProjects\gRPCSample\Client\obj\Release\netcoreapp2.0\Client.pdb

@@ -35,8 +35,7 @@ namespace Benchmark
             bool isLinux = RuntimeInformation.IsOSPlatform(OSPlatform.Linux);
             string path = isLinux
                     ? @"../Server/Server"
-                    //? @"../Server/bin/Debug/netcoreapp2.0/ubuntu-x64/publish/Server"
-                    : @"..\gRPCSample\Server\bin\Release\netcoreapp2.0\win-x64\publish\Server.exe";
+                    : @"..\Server\bin\Release\netcoreapp2.0\win-x64\publish\Server.exe";
             try
             {
                 Process.Start(path, $"{Port}");

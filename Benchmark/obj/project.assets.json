@@ -3652,6 +3652,9 @@
   },
   "project": {
     "version": "1.0.0",
+    "restoreSettings": {
+      "hideWarningsAndErrors": true
+    },
     "restore": {
       "projectUniqueName": "D:\\GitProjects\\gRPCSample\\Benchmark\\Benchmark.csproj",
       "projectName": "Benchmark",
@@ -3692,22 +3695,22 @@
     "frameworks": {
       "netcoreapp2.0": {
         "dependencies": {
-          "BenchmarkDotNet": {
-            "target": "Package",
-            "version": "[0.10.11, )"
-          },
           "BenchmarkDotNet.Core": {
             "target": "Package",
-            "version": "[0.10.11, )"
-          },
-          "Grpc.Core": {
-            "target": "Package",
-            "version": "[1.8.0, )"
+            "version": "0.10.11"
           },
           "Microsoft.NETCore.App": {
             "target": "Package",
-            "version": "[2.0.0, )",
+            "version": "2.0",
             "autoReferenced": true
+          },
+          "Grpc.Core": {
+            "target": "Package",
+            "version": "1.8.0"
+          },
+          "BenchmarkDotNet": {
+            "target": "Package",
+            "version": "0.10.11"
           }
         },
         "imports": [
