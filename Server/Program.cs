@@ -10,9 +10,7 @@ namespace Server
         private readonly int servicePort;
 
         public HelloServiceImpl(int servicePort)
-        {
-            this.servicePort = servicePort;
-        }
+            => this.servicePort = servicePort;
 
         public override Task<HelloResponse> SayHello(HelloRequest request, Core.ServerCallContext context)
             => Task.FromResult(new HelloResponse { Message = $"Hello {request.Name}" });
