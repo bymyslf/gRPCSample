@@ -18,9 +18,9 @@ namespace Client
             (port) => (prt) => new Channel($"127.0.0.1:{prt}", ChannelCredentials.Insecure)
         );
 
-        public static void Main(string[] args) => AsyncMain(args).GetAwaiter().GetResult();
+        public static void Main(string[] args) => MainAsync(args).GetAwaiter().GetResult();
 
-        private static async Task AsyncMain(string[] args)
+        private static async Task MainAsync(string[] args)
         {
             int numServers = 10;
             int.TryParse(args[0], out numServers);
@@ -40,7 +40,7 @@ namespace Client
             foreach (var proc in serverProcesses)
                 proc.process.Close();
 
-            Console.WriteLine("Press any key to exit...");
+            Console.WriteLine("Press Ctrl+C to exit...");
             Console.ReadKey();
         }
 
