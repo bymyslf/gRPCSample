@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using Core = Grpc.Core;
 using gRPCSample.Proto;
-using System.Threading;
 
 namespace Server
 {
@@ -19,18 +18,10 @@ namespace Server
 
     class Program
     {
-        private static ManualResetEvent quiteEvent = new ManualResetEvent(false);
-
         public static void Main(string[] args) => MainAsync(args).GetAwaiter().GetResult();
 
         private static async Task MainAsync(string[] args)
         {
-            Console.CancelKeyPress += (sender, eventArgs) =>
-            {
-                quiteEvent.Set();
-                eventArgs.Cancel = true;
-            };
-
             int port = 50051;
             int.TryParse(args[0], out port);
 
@@ -43,9 +34,7 @@ namespace Server
 
             Console.WriteLine("HelloService server listening on port " + port);
 
-            quiteEvent.WaitOne();
-
-            await server.ShutdownAsync();
+            await server.ShutdownTask;
         }
     }
 }

@@ -9,11 +9,14 @@ using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Collections.Concurrent;
 using System.Collections;
+using System.Threading;
 
 namespace Client
 {
     class Program
     {
+        private static ManualResetEvent quiteEvent = new ManualResetEvent(false);
+
         private static readonly ChannelsCache channelsCache = new ChannelsCache(
             (port) => (prt) => new Channel($"127.0.0.1:{prt}", ChannelCredentials.Insecure)
         );
@@ -22,6 +25,12 @@ namespace Client
 
         private static async Task MainAsync(string[] args)
         {
+            Console.CancelKeyPress += (sender, eventArgs) =>
+            {
+                quiteEvent.Set();
+                eventArgs.Cancel = true;
+            };
+
             int numServers = 10;
             int.TryParse(args[0], out numServers);
 
@@ -41,7 +50,8 @@ namespace Client
                 proc.process.Close();
 
             Console.WriteLine("Press Ctrl+C to exit...");
-            Console.ReadKey();
+
+            quiteEvent.WaitOne();
         }
 
         private static async Task DoWork((int port, int taskId) data)
