@@ -2,7 +2,7 @@
   "profiles": {
     "Client": {
       "commandName": "Project",
-      "commandLineArgs": "1000 500"
+      "commandLineArgs": "10 5"
     }
   }
 }

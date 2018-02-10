@@ -2,9 +2,33 @@
 using System.Threading.Tasks;
 using Core = Grpc.Core;
 using gRPCSample.Proto;
+using Google.Protobuf.WellKnownTypes;
 
 namespace Server
 {
+    class ShutdownServiceImpl : ShutdownService.ShutdownServiceBase
+    {
+        private volatile bool _shutdownRequested;
+        private readonly TaskCompletionSource<object> _shutdownTcs = new TaskCompletionSource<object>();
+
+        public Task ShutdownTask => _shutdownTcs.Task;
+
+        public override Task<Empty> Shutdown(Empty request, Core.ServerCallContext context)
+        {
+            lock (_shutdownTcs)
+            {
+                if (_shutdownRequested)
+                    throw new InvalidOperationException("Service shutdown already requested");
+ 
+                _shutdownRequested = true;
+            }
+
+            _shutdownTcs.SetResult(null);
+
+            return Task.FromResult(new Empty());
+        }
+    }
+
     class HelloServiceImpl : HelloService.HelloServiceBase
     {
         private readonly int servicePort;
@@ -25,16 +49,23 @@ namespace Server
             int port = 50051;
             int.TryParse(args[0], out port);
 
+            var shutdownService = new ShutdownServiceImpl();
+
             Core.Server server = new Core.Server
             {
-                Services = { HelloService.BindService(new HelloServiceImpl(port)) },
+                Services =
+                {
+                    HelloService.BindService(new HelloServiceImpl(port)),
+                    ShutdownService.BindService(shutdownService)
+                },
                 Ports = { new Core.ServerPort("localhost", port, Core.ServerCredentials.Insecure) }
             };
             server.Start();
 
             Console.WriteLine("HelloService server listening on port " + port);
 
-            await server.ShutdownTask;
+            await shutdownService.ShutdownTask;
+            await server.ShutdownAsync();
         }
     }
 }

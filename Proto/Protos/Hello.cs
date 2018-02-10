@@ -23,15 +23,15 @@ namespace gRPCSample.Proto {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "CgtoZWxsby5wcm90bxIKZ1JQQ1NhbXBsZSIcCgxIZWxsb1JlcXVlc3QSDAoE",
-            "bmFtZRgBIAEoCSIgCg1IZWxsb1Jlc3BvbnNlEg8KB21lc3NhZ2UYASABKAky",
-            "TwoMSGVsbG9TZXJ2aWNlEj8KCFNheUhlbGxvEhguZ1JQQ1NhbXBsZS5IZWxs",
-            "b1JlcXVlc3QaGS5nUlBDU2FtcGxlLkhlbGxvUmVzcG9uc2VCE6oCEGdSUENT",
-            "YW1wbGUuUHJvdG9iBnByb3RvMw=="));
+            "bmFtZRgBIAEoCSIuCg1IZWxsb1Jlc3BvbnNlEg8KB21lc3NhZ2UYASABKAkS",
+            "DAoEdGVzdBgCIAEoCTJPCgxIZWxsb1NlcnZpY2USPwoIU2F5SGVsbG8SGC5n",
+            "UlBDU2FtcGxlLkhlbGxvUmVxdWVzdBoZLmdSUENTYW1wbGUuSGVsbG9SZXNw",
+            "b25zZUITqgIQZ1JQQ1NhbXBsZS5Qcm90b2IGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::gRPCSample.Proto.HelloRequest), global::gRPCSample.Proto.HelloRequest.Parser, new[]{ "Name" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::gRPCSample.Proto.HelloResponse), global::gRPCSample.Proto.HelloResponse.Parser, new[]{ "Message" }, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::gRPCSample.Proto.HelloResponse), global::gRPCSample.Proto.HelloResponse.Parser, new[]{ "Message", "Test" }, null, null, null)
           }));
     }
     #endregion
@@ -180,6 +180,7 @@ namespace gRPCSample.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public HelloResponse(HelloResponse other) : this() {
       message_ = other.message_;
+      test_ = other.test_;
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -198,6 +199,17 @@ namespace gRPCSample.Proto {
       }
     }
 
+    /// <summary>Field number for the "test" field.</summary>
+    public const int TestFieldNumber = 2;
+    private string test_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Test {
+      get { return test_; }
+      set {
+        test_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as HelloResponse);
@@ -212,6 +224,7 @@ namespace gRPCSample.Proto {
         return true;
       }
       if (Message != other.Message) return false;
+      if (Test != other.Test) return false;
       return true;
     }
 
@@ -219,6 +232,7 @@ namespace gRPCSample.Proto {
     public override int GetHashCode() {
       int hash = 1;
       if (Message.Length != 0) hash ^= Message.GetHashCode();
+      if (Test.Length != 0) hash ^= Test.GetHashCode();
       return hash;
     }
 
@@ -233,6 +247,10 @@ namespace gRPCSample.Proto {
         output.WriteRawTag(10);
         output.WriteString(Message);
       }
+      if (Test.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(Test);
+      }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -240,6 +258,9 @@ namespace gRPCSample.Proto {
       int size = 0;
       if (Message.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Message);
+      }
+      if (Test.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Test);
       }
       return size;
     }
@@ -251,6 +272,9 @@ namespace gRPCSample.Proto {
       }
       if (other.Message.Length != 0) {
         Message = other.Message;
+      }
+      if (other.Test.Length != 0) {
+        Test = other.Test;
       }
     }
 
@@ -264,6 +288,10 @@ namespace gRPCSample.Proto {
             break;
           case 10: {
             Message = input.ReadString();
+            break;
+          }
+          case 18: {
+            Test = input.ReadString();
             break;
           }
         }

@@ -20,7 +20,10 @@ setlocal
 cd /d %~dp0
 
 set TOOLS_PATH=%USERPROFILE%\.nuget\packages\grpc.tools\1.8.0\tools\windows_x64
+set PROTOBUF_TOOLS_PATH=%USERPROFILE%\.nuget\packages\google.protobuf.tools\3.5.1\tools
 
 %TOOLS_PATH%\protoc.exe --csharp_out Protos hello.proto --grpc_out Protos --plugin=protoc-gen-grpc=%TOOLS_PATH%\grpc_csharp_plugin.exe
+
+%TOOLS_PATH%\protoc.exe -I ./ -I %PROTOBUF_TOOLS_PATH% --csharp_out Protos shutdown.proto --grpc_out Protos --plugin=protoc-gen-grpc=%TOOLS_PATH%\grpc_csharp_plugin.exe
 
 endlocal

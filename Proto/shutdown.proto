@@ -1,0 +1,11 @@
+﻿syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+
+package gRPCSample;
+
+option csharp_namespace = "gRPCSample.Proto";
+
+service ShutdownService {
+  rpc Shutdown (google.protobuf.Empty) returns (google.protobuf.Empty);
+}
